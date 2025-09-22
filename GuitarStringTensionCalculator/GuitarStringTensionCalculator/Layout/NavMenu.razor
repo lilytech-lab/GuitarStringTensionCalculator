@@ -1,39 +1,15 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">GuitarStringTensionCalculator</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
+﻿<MudNavMenu Color="Color.Inherit">
+	<MudNavLink Match="NavLinkMatch.All" Href="/" Icon="@Icons.Material.Outlined.SyncAlt" IconColor="Color.Inherit">IO Setting</MudNavLink>
+	<MudBadge Dot="true" Color="Color.Secondary" Overlap="true" Visible="@HasNotification">
+		<MudNavLink Match="NavLinkMatch.All" Href="fw-update" Icon="@Icons.Material.Outlined.SystemUpdate" IconColor="Color.Inherit">Firmware Update</MudNavLink>
+	</MudBadge>
+	<MudNavLink Match="NavLinkMatch.All" Href="information" Icon="@Icons.Material.Outlined.Info" IconColor="Color.Inherit">Information</MudNavLink>
+	<MudNavLink Match="NavLinkMatch.All" Href="licenses" Icon="@Icons.Material.Outlined.Article" IconColor="Color.Inherit">Licenses</MudNavLink>
+</MudNavMenu>
 
 @code {
-    private bool collapseNavMenu = true;
+	private bool HasNotification => false;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+	protected override void OnInitialized() {}
 }
+
