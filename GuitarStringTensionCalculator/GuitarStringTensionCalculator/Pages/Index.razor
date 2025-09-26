@@ -1,0 +1,163 @@
+﻿@page "/"
+@using static LilytechLab.GuitarStringTensionCalculator.Data.GuitarSetting.StringSetting
+@using static LilytechLab.GuitarStringTensionCalculator.Data.GuitarSetting
+
+<PageTitle>Guitar String Tension Calculator</PageTitle>
+
+<MudText Class="pa-2">@message</MudText>
+
+<MudPaper Class="pa-4">
+	@{
+		var guitar = guitarSetting;
+	}
+
+	<MudTextField @bind-Value="guitar.GuitarName" Variant="Variant.Text" Typo="Typo.h5"></MudTextField>
+
+	<MudStack Row Class="pa-4">
+		<MudSelect @bind-Value="guitar.NeckType" Label="ネックの種類">
+			@foreach (var value in Enum.GetValues<TypeOfNeck>()) {
+				@if (value == TypeOfNeck.Normal) {
+					<MudSelectItem value="value">@value</MudSelectItem>
+				}
+			}
+		</MudSelect>
+
+		<MudSelect @bind-Value="guitar.NeckLength" Label="ネックの長さ">
+			@foreach (var value in NeckLengthArray) {
+				<MudSelectItem value="value">@value</MudSelectItem>
+			}
+		</MudSelect>
+	</MudStack>
+
+	<MudStack Row Class="pa-4">
+		<MudSelect @bind-Value="guitar.StringCount" Label="弦数">
+			@foreach (int i in Enumerable.Range(6, 3)) {
+				if (i == 6) {
+					<MudSelectItem value="i">@i</MudSelectItem>
+				}
+			}
+		</MudSelect>
+
+		@* @switch (guitar.StringCount) {
+			case 6:
+				<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
+					@foreach (var value in Enum.GetValues<TypeOfStringSetForSix>()) {
+						<MudSelectItem value="value">@value</MudSelectItem>
+					}
+				</MudSelect>
+				break;
+
+			 case 7:
+				<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
+					@foreach (var value in Enum.GetValues<TypeOfStringSetForSeven>()) {
+						<MudSelectItem value="value">@value</MudSelectItem>
+					}
+				</MudSelect>
+				break;
+
+			case 9:
+				<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
+					@foreach (var value in Enum.GetValues<TypeOfStringSetForEight>()) {
+						<MudSelectItem value="value">@value</MudSelectItem>
+					}
+				</MudSelect>
+				break;
+
+			default:
+				break;
+		} *@
+	</MudStack>
+
+	<MudStack Row Class="pa-4">
+		<MudSelect @bind-Value="guitar.TuningType" Label="チューニング">
+			@foreach (var value in Enum.GetValues<TypeOfTuning>()) {
+				@if (value == TypeOfTuning.Standard) {
+					<MudSelectItem value="value">@value</MudSelectItem>
+				}
+			}
+		</MudSelect>
+
+		<MudSelect @bind-Value="guitar.StandardTuningType" Label="キー">
+			@foreach (var value in Enum.GetValues<TypeOfStandardTuning>().OrderByDescending(x => (int)x)) {
+				<MudSelectItem value="value">@value</MudSelectItem>
+			}
+		</MudSelect>
+	</MudStack>
+
+	<MudTable Items="@guitar.StringSettings" Dense="true">
+		@* <ColGroup>
+			<col style="width:50px;" />
+			<col style="width:80px;" />
+			<col style="width:50%;" />
+			<col />
+			<col />
+			<col />
+		</ColGroup> *@
+		<HeaderContent>
+			<MudTh></MudTh>
+			<MudTh>P/W</MudTh>
+			<MudTh>ゲージ</MudTh>
+			<MudTh>音高</MudTh>
+			<MudTh>張力[kg]</MudTh>
+			@* <MudTh>周波数</MudTh> *@
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="">@(context.StringNumber + "弦")</MudTd>
+			<MudTd DataLabel="P/W">@context.PlainOrWound</MudTd>
+			<MudTd DataLabel="ゲージ">
+				@if (context.PlainOrWound == TypeOfPlainOrWound.P) {
+					@context.PlainStringGauge
+				} else {
+					@context.WoundStringGauge
+				}
+			</MudTd>
+			<MudTd DataLabel="音高">@context.KeyDic[context.Offset]</MudTd>
+			<MudTd DataLabel="張力[kg]">@context.Tension.ToString("f2")</MudTd>
+			@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
+		</RowTemplate>
+		<RowEditingTemplate>
+			<MudTd DataLabel="">@(context.StringNumber + "弦")</MudTd>
+			<MudTd DataLabel="P/W">
+				@context.PlainOrWound
+				@* <MudToggleGroup @bind-Value="@context.PlainOrWound" Vertical="false" Outlined="true" Delimiters="true" Size="Size.Small" Color="Color.Primary" CheckMark="false" Disabled="false">
+					@foreach (var value in Enum.GetValues<TypeOfPlainOrWound>()) {
+						<MudToggleItem Value="value">
+							<ChildContent Context="_">
+								@value
+							</ChildContent>
+						</MudToggleItem>
+					}
+				</MudToggleGroup> *@
+			</MudTd>
+			<MudTd DataLabel="ゲージ">
+				@if (context.PlainOrWound == TypeOfPlainOrWound.P) {
+					<MudSelect @bind-Value="@context.PlainStringGauge">
+						@foreach (var value in Enum.GetValues<TypeOfPlainStringGauge>().OrderByDescending(x => (int)x)) {
+							<MudSelectItem value="value">@value</MudSelectItem>
+						}
+					</MudSelect>
+				} else {
+					<MudSelect @bind-Value="@context.WoundStringGauge">
+						@foreach (var value in Enum.GetValues<TypeOfWoundStringGauge>().OrderByDescending(x => (int)x)) {
+							<MudSelectItem value="value">@value</MudSelectItem>
+						}
+					</MudSelect>
+				}
+			</MudTd>
+			<MudTd DataLabel="音高">
+				<MudSelect @bind-Value="@context.Offset">
+					@foreach (var keyValuePair in context.KeyDic) {
+						<MudSelectItem value="keyValuePair.Key">@keyValuePair.Value</MudSelectItem>
+					}
+				</MudSelect>
+			</MudTd>
+			<MudTd DataLabel="張力[kg]">@context.Tension.ToString("f2")</MudTd>
+			@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
+		</RowEditingTemplate>
+	</MudTable>
+</MudPaper>
+
+<MudContainer Class="pa-4">
+    <MudChart ChartType="ChartType.Line" ChartSeries="@serieses" XAxisLabels="@xAxisLabels" Width="100%" Height="350" ChartOptions="@chartOptions"></MudChart>
+</MudContainer>
+

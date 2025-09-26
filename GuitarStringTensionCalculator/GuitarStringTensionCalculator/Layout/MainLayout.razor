@@ -10,10 +10,26 @@
 		<MudBadge Dot="true" Color="Color.Secondary" Overlap="true" Visible="@HasNotification">
 			<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
 		</MudBadge>
+		<MudText Typo="Typo.h6">Guitar String Tension Calculator</MudText>
+		<MudSpacer />
+		<MudIconButton
+			Href="https://github.com/lilytech-lab/GuitarStringTensionCalculator"
+			Target="_blank"
+			Icon="@Icons.Custom.Brands.GitHub"
+			Color="Color.Inherit" />
+		@{
+			var youTubeUrl = "https://www.youtube.com/@lilytech-lab";
+		}
+		<MudButton Size="Size.Small" Href="@youTubeUrl" Target="_blank">
+			<MudImage Src="resources/yt_icon_white_digital.png" Height="44" Alt="YouTubeりりらぼチャンネル" Elevation="25" />
+		</MudButton>
+		<MudButton Size="Size.Small" Href="https://www.lilytech-lab.com/" Target="_blank">
+			<MudImage Src="resources/りりらぼロゴ_120px.png" Height="44" Alt="りりらぼHomePage" Elevation="25" Class="rounded-lg" />
+		</MudButton>
 	</MudAppBar>
 	<MudDrawer @bind-Open="@isOpeningMenu" Variant="@DrawerVariant.Responsive" Color="Color.Primary" Elevation="1">
 		<MudDrawerHeader>
-			<MudText Typo="Typo.h6">Guitar String Tension Calculator</MudText>
+			<MudText Typo="Typo.h6"></MudText>
 		</MudDrawerHeader>
 		<NavMenu />
 	</MudDrawer>
