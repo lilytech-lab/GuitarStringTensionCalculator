@@ -16,19 +16,18 @@ public class GuitarSetting {
 
 	private int stringCount = 6;
 
+	private TypeOfStandardTuning standardTuningType = TypeOfStandardTuning.E;
+
 	private TypeOfStringSetForSix stringSetForSix = TypeOfStringSetForSix.DAddarioErnieBall_009;
 
 	private float neckLength = 25.5f;
-
-	private StringSetting[] stringSettings = new StringSetting[6];
 	#endregion
 
 	#region constructors
 	public GuitarSetting(int guitarNumber) {
-
 		for (var i = 0; i < 6; i++) {
 			var stringSetting = new StringSetting(i + 1,this.NeckLength);
-			this.StringSettings[i] = stringSetting;
+			this.StringSettings.Add( stringSetting);
 		}
 
 		this.guitarName = $"Guitar #{guitarNumber}";
@@ -139,20 +138,6 @@ public class GuitarSetting {
 	public enum TypeOfOpenTuning {
 
 	}
-
-	public enum TypeOfOffset {
-		Plus1 = 1,
-		Regular = 0,
-		Minus1 = -1,
-		Minus2 = -2,
-		Minus3 = -3,
-		Minus4 = -4,
-		Minus5 = -5,
-		Minus6 = -6,
-		Minus7 = -7,
-		Minus8 = -8,
-		Minus9 = -9
-	}
 	#endregion
 
 	#region properties
@@ -177,8 +162,8 @@ public class GuitarSetting {
 
 			this.neckLength = value;
 
-			for (var i = 0; i < this.stringSettings.Length; i++) {
-				this.stringSettings[i].Length = this.neckLength;
+			for (var i = 0; i < this.StringSettings.Count; i++) {
+				this.StringSettings[i].Length = this.neckLength;
 			}
 		}
 	}
@@ -191,18 +176,20 @@ public class GuitarSetting {
 			var oldCount = this.stringCount;
 			this.stringCount = value;
 
-			Array.Resize(ref this.StringSettings, this.stringCount);
 			if (oldCount < this.stringCount) {
 				if (oldCount == 6) {
 					var stringSetting = new StringSetting(7, this.NeckLength);
-					this.StringSettings[6] = stringSetting;
+					this.StringSettings.Add(stringSetting);
 				}
 				if (this.stringCount == 8) {
 					var stringSetting = new StringSetting(8, this.NeckLength);
-					this.StringSettings[7] = stringSetting;
+					this.StringSettings.Add(stringSetting);
 				}
 
-				SetGauge();
+				this.SetGauge();
+			} else {
+				this.StringSettings.RemoveRange(this.stringCount, oldCount - this.stringCount);
+				this.UpdateChart();
 			}
 		}
 	}
@@ -217,18 +204,17 @@ public class GuitarSetting {
 
 	public TypeOfTuning TuningType { get; set; } = TypeOfTuning.Standard;
 
-	private TypeOfStandardTuning standardTuningType = TypeOfStandardTuning.E;
 	public TypeOfStandardTuning StandardTuningType {
 		get => this.standardTuningType;
 		set {
 			if (this.standardTuningType == value) return;
 
 			this.standardTuningType = value;
-			Array.ForEach(this.StringSettings, x => x.Offset = (int)(this.standardTuningType));
+			this.StringSettings.ForEach(x => x.Offset = (int)(this.standardTuningType));
 		}
 	}
 
-	public ref StringSetting[] StringSettings => ref this.stringSettings;
+	public List<StringSetting> StringSettings { get; private set; } = new(8);
 
 	public ChartSeries ChartSeries { get; } = new() {
 		ShowDataMarkers = true
@@ -237,14 +223,21 @@ public class GuitarSetting {
 
 	#region private methods
 	private void SetGauge() {
+		this.StringSettings[0].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P010;
+		this.StringSettings[1].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P013;
+		this.StringSettings[2].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P017;
+		this.StringSettings[3].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W026;
+		this.StringSettings[4].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W036;
+		this.StringSettings[5].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W046;
+
+		if (this.StringSettings.Count > 6)
+			this.StringSettings[6].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W064;
+
+		if (this.StringSettings.Count == 8)
+			this.StringSettings[7].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W074;
+
 		switch (this.StringSetForSix) {
 			case TypeOfStringSetForSix.DAddarioErnieBall_009:
-				this.StringSettings[0].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P010;
-				this.StringSettings[1].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P013;
-				this.StringSettings[2].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P017;
-				this.StringSettings[3].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W026;
-				this.StringSettings[4].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W036;
-				this.StringSettings[5].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W046;
 				break;
 			default:
 				break;
@@ -304,7 +297,7 @@ public class GuitarSetting {
 			P007 = 1085,
 			P008 = 1418,
 			P0085 = 1601,
-			P009 = 1741,
+			P009 = 1794,
 			P0095 = 1999,
 			P010 = 2215,
 			P0105 = 2442,
@@ -417,6 +410,8 @@ public class GuitarSetting {
 			}
 		}
 
+		public double Tension_lb { get; private set; }
+
 		public double Freqency {
 			get {
 				var offsetFromA0OnStandardKey = this.StringNumber switch {
@@ -427,7 +422,7 @@ public class GuitarSetting {
 					5 => 0 + (12 * 2), // A2
 					6 => -5 + (12 * 2), // E2
 					7 => 2 + (12 * 1), // B1
-					8 => 3 + (12 * 1), // F#1
+					8 => -3 + (12 * 1), // F#1
 					_ => throw new NotImplementedException($"StringNumber: {this.StringNumber} に対応する音高が設定されていません")
 				};
 
@@ -457,7 +452,8 @@ public class GuitarSetting {
 				_ => throw new NotImplementedException($"PlainOrWound: {this.PlainOrWound} に対応するUWが設定されていません")
 			};
 
-			this.Tension = (uw * Math.Pow(2 * this.Length * this.Freqency, 2) / 386.4) / 2.2046;
+			this.Tension_lb = (uw * Math.Pow(2 * this.Length * this.Freqency, 2) / 386.4);
+			this.Tension = this.Tension_lb / 2.2046;
 		}
 		#endregion
 
