@@ -14,13 +14,19 @@ public class GuitarSetting {
 	#region fields
 	private string guitarName;
 
+	private TypeOfNeck neckType = TypeOfNeck.Normal;
+
+	private float neckLength = 25.5f;
+
+	private float minNeckLength = 25.5f;
+
+	private float maxNeckLength = 30.0f;
+
 	private int stringCount = 6;
 
 	private TypeOfStandardTuning standardTuningType = TypeOfStandardTuning.E;
 
 	private TypeOfStringSetForSix stringSetForSix = TypeOfStringSetForSix.DAddarioErnieBall_009;
-
-	private float neckLength = 25.5f;
 	#endregion
 
 	#region constructors
@@ -153,7 +159,15 @@ public class GuitarSetting {
 		}
 	}
 
-	public TypeOfNeck NeckType { get; set; } = TypeOfNeck.Normal;
+	public TypeOfNeck NeckType {
+		get => this.neckType;
+		set {
+			if (this.neckType == value) return;
+
+			this.neckType = value;
+			this.SetStringLength();
+		}
+	}
 
 	public float NeckLength {
 		get => this.neckLength;
@@ -161,10 +175,27 @@ public class GuitarSetting {
 			if (this.neckLength == value) return;
 
 			this.neckLength = value;
+			this.SetStringLength();
+		}
+	}
 
-			for (var i = 0; i < this.StringSettings.Count; i++) {
-				this.StringSettings[i].Length = this.neckLength;
-			}
+	public float MinNeckLength {
+		get => this.minNeckLength;
+		set {
+			if (this.minNeckLength == value) return;
+
+			this.minNeckLength = value;
+			this.SetStringLength();
+		}
+	}
+
+	public float MaxNeckLength {
+		get => this.maxNeckLength;
+		set {
+			if (this.maxNeckLength == value) return;
+
+			this.maxNeckLength = value;
+			this.SetStringLength();
 		}
 	}
 
@@ -191,6 +222,11 @@ public class GuitarSetting {
 				this.StringSettings.RemoveRange(this.stringCount, oldCount - this.stringCount);
 				this.UpdateChart();
 			}
+
+			if (this.NeckType == TypeOfNeck.Multi) {
+				this.SetStringLength();
+			}
+			
 		}
 	}
 
@@ -222,6 +258,20 @@ public class GuitarSetting {
 	#endregion
 
 	#region private methods
+
+	private void SetStringLength() {
+		for (var i = 0; i < this.StringSettings.Count; i++) {
+			if (this.NeckType == TypeOfNeck.Normal) {
+				this.StringSettings[i].Length = this.NeckLength;
+			} else {
+				var diff = (this.MaxNeckLength - this.MinNeckLength) / (this.StringCount - 1);
+				this.StringSettings[i].Length = this.MinNeckLength + (diff * i);
+			}
+		}
+
+		this.UpdateChart();
+	}
+
 	private void SetGauge() {
 		this.StringSettings[0].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P010;
 		this.StringSettings[1].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P013;
@@ -231,10 +281,10 @@ public class GuitarSetting {
 		this.StringSettings[5].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W046;
 
 		if (this.StringSettings.Count > 6)
-			this.StringSettings[6].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W064;
+			this.StringSettings[6].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W054;
 
 		if (this.StringSettings.Count == 8)
-			this.StringSettings[7].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W074;
+			this.StringSettings[7].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W064;
 
 		switch (this.StringSetForSix) {
 			case TypeOfStringSetForSix.DAddarioErnieBall_009:
@@ -369,6 +419,8 @@ public class GuitarSetting {
 		public float Length {
 			get => this.length;
 			set {
+				if (this.length == value) return;
+
 				this.length = value;
 				this.CalcTension();
 			}

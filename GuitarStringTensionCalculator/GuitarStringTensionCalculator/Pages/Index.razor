@@ -16,17 +16,32 @@
 	<MudStack Row Class="pa-4">
 		<MudSelect @bind-Value="guitar.NeckType" Label="ネックの種類">
 			@foreach (var value in Enum.GetValues<TypeOfNeck>()) {
-				@if (value == TypeOfNeck.Normal) {
-					<MudSelectItem value="value">@value</MudSelectItem>
-				}
-			}
-		</MudSelect>
-
-		<MudSelect @bind-Value="guitar.NeckLength" Label="ネックの長さ">
-			@foreach (var value in NeckLengthArray) {
 				<MudSelectItem value="value">@value</MudSelectItem>
 			}
 		</MudSelect>
+
+		@if (guitar.NeckType == TypeOfNeck.Normal) {
+			<MudSelect @bind-Value="guitar.NeckLength" Label="ネックの長さ">
+				@foreach (var value in NeckLengthArray) {
+					<MudSelectItem value="value">@value</MudSelectItem>
+				}
+			</MudSelect>
+		} else {
+			<MudSelect @bind-Value="guitar.MinNeckLength" Label="1弦の長さ">
+				@foreach (var value in NeckLengthArray) {
+					<MudSelectItem value="value">@value</MudSelectItem>
+				}
+			</MudSelect>
+
+			<MudText Class="px-2">～</MudText>
+
+			<MudSelect @bind-Value="guitar.MaxNeckLength" Label="最低限の長さ">
+				@foreach (var value in NeckLengthArray) {
+					<MudSelectItem value="value">@value</MudSelectItem>
+				}
+			</MudSelect>
+			
+		}
 	</MudStack>
 
 	<MudStack Row Class="pa-4">
@@ -98,6 +113,7 @@
 			<MudTh>音高</MudTh>
 			<MudTh>張力[kg]</MudTh>
 			@* <MudTh>張力[lb]</MudTh> *@
+			<MudTh>スケール</MudTh>
 			@* <MudTh>周波数</MudTh> *@
 		</HeaderContent>
 		<RowTemplate>
@@ -113,6 +129,7 @@
 			<MudTd DataLabel="音高">@context.KeyDic[context.Offset]</MudTd>
 			<MudTd DataLabel="張力[kg]">@context.Tension.ToString("f2")</MudTd>
 			@* <MudTd DataLabel="張力[lb]">@context.Tension_lb.ToString("f2")</MudTd> *@
+			<MudTd DataLabel="スケール">@context.Length.ToString("f2")</MudTd>
 			@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
 		</RowTemplate>
 		<RowEditingTemplate>
@@ -153,6 +170,7 @@
 			</MudTd>
 			<MudTd DataLabel="張力[kg]">@context.Tension.ToString("f2")</MudTd>
 			@* <MudTd DataLabel="張力[lb]">@context.Tension_lb.ToString("f2")</MudTd> *@
+			<MudTd DataLabel="スケール">@context.Length.ToString("f2")</MudTd>
 			@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
 		</RowEditingTemplate>
 	</MudTable>
