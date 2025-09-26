@@ -13,8 +13,8 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-\/NCG9naCub5ckHeFNmOxuposRJKn06Sgb37KFArajOY=",
-      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.06p6d8n34f.wasm.br"
+      "hash": "sha256-e+156CJO0ys9Hp1U6wlG5vz9KG\/cSg5+f3Zk2Lz9PdU=",
+      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.o1wdc3lu29.wasm.br"
     },
     {
       "hash": "sha256-aHzFQB8SyVltu4Oi9Ok\/nuBdB+qU0FJq\/xa6lkHDd90=",
@@ -185,7 +185,7 @@
       "url": "_framework\/System.m0fu6d0eya.wasm.br"
     },
     {
-      "hash": "sha256-Ciy4d9y4roZ2iV4YAwowZrNZ6wJNC+aJvcCdJKdlpvc=",
+      "hash": "sha256-64mFhiN024rS5HXwcAtAa93AFU5zR29ILS5yu2XQZi0=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -237,7 +237,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-ym799M61y8DR\/eKXkIWYOcWoCfzI0yLdXEFPd3seLsQ=",
+      "hash": "sha256-zB5wztJH0ROLpmCtGKX+dw3Lr\/cdePiebHr9c1KHZ0U=",
       "url": "index.html"
     },
     {
@@ -437,5 +437,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "dOj1ptBR"
+  "version": "zLqWSnyy"
 };

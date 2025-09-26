@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     <GHPages>true</GHPages>
-    <!--<GHpagesBase>/</GHpagesBase>-->
+    <GHpagesBase>/</GHpagesBase>
     <RootNamespace>LilytechLab.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <AssemblyName>LilytechLab.$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
