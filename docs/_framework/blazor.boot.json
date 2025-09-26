@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "LilytechLab.GuitarStringTensionCalculator",
   "resources": {
-    "hash": "sha256-xagI9M7QlXOMFk8Al6IehNASDIn6Y8Hsud1kcX6tASU=",
+    "hash": "sha256-aki4wdKZzUGise9wGE1XrsdeN9gCIFv5CXH739zE81A=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.vng26hhzhi.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Forms.yv2qi7o6jg.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
@@ -45,7 +45,7 @@
       "System.Threading.92ez24v1xd.wasm": "System.Threading.wasm",
       "System.m0fu6d0eya.wasm": "System.wasm",
       "System.Private.CoreLib.v1f7ro7m7g.wasm": "System.Private.CoreLib.wasm",
-      "LilytechLab.GuitarStringTensionCalculator.o1wdc3lu29.wasm": "LilytechLab.GuitarStringTensionCalculator.wasm",
+      "LilytechLab.GuitarStringTensionCalculator.0n7f0ntxsq.wasm": "LilytechLab.GuitarStringTensionCalculator.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.9ih887ebfz.js": "dotnet.native.js",
       "dotnet.native.21mns4qp4i.wasm": "dotnet.native.wasm",
@@ -113,7 +113,7 @@
       "System.Text.RegularExpressions.yf50ka5y51.wasm": "sha256-jucDaG3uER5OszHfUFkriy4wTbZUSP/Q29um3UE8EwU=",
       "System.Threading.92ez24v1xd.wasm": "sha256-8TOdx+WTSrBAkPVcYh/dHgxZeRNAfj3bK1p4ESYA1bo=",
       "System.m0fu6d0eya.wasm": "sha256-hkGLo/MuT/FJ0Xf4XUL0D2VA4dZV532GHNB1JicxLko=",
-      "LilytechLab.GuitarStringTensionCalculator.o1wdc3lu29.wasm": "sha256-fCvLy01ZIwE4zp52JxvEepgvlICv+3Dui7hIeyRL+bY="
+      "LilytechLab.GuitarStringTensionCalculator.0n7f0ntxsq.wasm": "sha256-lF+xJaFzuW7poj/2eVxa0ydK84GRZYkh4urb8ERjhZ8="
     }
   },
   "cacheBootResources": true,
