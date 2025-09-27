@@ -13,8 +13,8 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-zEVmmOLpHICszqy+3TH5b3HPI07fZ92dbApRiniiuVU=",
-      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.vrjpnewgrz.wasm.br"
+      "hash": "sha256-OK6nds1ewFIx7SDrX\/\/0DrfOVzaSXdxpjtXoTYG5wiE=",
+      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.vqf65tdd1n.wasm.br"
     },
     {
       "hash": "sha256-aHzFQB8SyVltu4Oi9Ok\/nuBdB+qU0FJq\/xa6lkHDd90=",
@@ -185,7 +185,7 @@
       "url": "_framework\/System.m0fu6d0eya.wasm.br"
     },
     {
-      "hash": "sha256-5PtbmCmP3anBBzpT5MxT7C0lBdeh9irQoSR\/0cGk1YY=",
+      "hash": "sha256-4yHR0Jmb\/rJbmicUKFtN1mNbqh6cbhpxsEotj+68EMA=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -437,5 +437,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "DKfIZnJW"
+  "version": "++1pMOhR"
 };

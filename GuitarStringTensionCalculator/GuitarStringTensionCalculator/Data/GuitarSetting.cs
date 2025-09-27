@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using MudBlazor;
+using static LilytechLab.GuitarStringTensionCalculator.Data.GuitarSetting.StringSetting;
 
 namespace LilytechLab.GuitarStringTensionCalculator.Data;
 
@@ -8,7 +9,7 @@ public class GuitarSetting {
 	#region constants/readonly
 	private static readonly float[] neckLengthArray = { 24.0f, 24.75f, 25.0f, 25.4f, 25.5f, 26.0f, 26.25f, 26.5f, 27.0f, 27.5f, 28.0f, 28.5f, 28.75f, 30.0f };
 
-	//private static readonly Dictionary<TypeOfStringSetForSix, (TypeOfPlainOrWound, TypeOfPlainStringGauge)> = new();
+	//private static readonly Dictionary<TypeOfStringSetForSix, (TypeOfPlainOrWound, TypeOfPlainStringGauge)> dicOfStringSetForSix = new();
 	#endregion
 
 	#region fields
@@ -133,17 +134,6 @@ public class GuitarSetting {
 		Aflat = -8,
 		G = -9
 	}
-
-	public enum TypeOfDropTuning {
-		D = 0,
-		Csharp = -1,
-		C = -2,
-		B = -3
-	}
-
-	public enum TypeOfOpenTuning {
-
-	}
 	#endregion
 
 	#region properties
@@ -237,8 +227,6 @@ public class GuitarSetting {
 			this.SetGauge();
 		}
 	}
-
-	public TypeOfTuning TuningType { get; set; } = TypeOfTuning.Standard;
 
 	public TypeOfStandardTuning StandardTuningType {
 		get => this.standardTuningType;
@@ -511,6 +499,22 @@ public class GuitarSetting {
 
 	}
 	#endregion
+
+}
+
+public static class Extension {
+
+	public static string GetKeyName(this GuitarSetting.TypeOfStandardTuning @this) {
+		return GetKeyName(@this.ToString());
+	}
+
+	public static string GetKeyName(this GuitarSetting.TypeOfKey @this) {
+		return GetKeyName(@this.ToString());
+	}
+
+	private static string GetKeyName(string elementName) {
+		return elementName.Replace("sharp", "#").Replace("flat", "♭");
+	}
 
 }
 
