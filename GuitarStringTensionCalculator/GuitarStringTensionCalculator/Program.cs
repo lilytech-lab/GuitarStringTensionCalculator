@@ -12,6 +12,8 @@ namespace LilytechLab.GuitarStringTensionCalculator {
 			builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 			builder.Services.AddMudServices();
 
+			builder.Services.AddLocalization();
+
 			await builder.Build().RunAsync();
 		}
 	}
