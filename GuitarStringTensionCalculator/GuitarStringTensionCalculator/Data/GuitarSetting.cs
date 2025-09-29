@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.ObjectModel;
+using System.Data;
 using MudBlazor;
 using static LilytechLab.GuitarStringTensionCalculator.Data.GuitarSetting.StringSetting;
 
@@ -9,7 +10,12 @@ public class GuitarSetting {
 	#region constants/readonly
 	private static readonly float[] neckLengthArray = { 24.0f, 24.75f, 25.0f, 25.4f, 25.5f, 26.0f, 26.25f, 26.5f, 27.0f, 27.5f, 28.0f, 28.5f, 28.75f, 30.0f };
 
-	//private static readonly Dictionary<TypeOfStringSetForSix, (TypeOfPlainOrWound, TypeOfPlainStringGauge)> dicOfStringSetForSix = new();
+	private static readonly Dictionary<TypeOfStringSetForSix, TypeOfPlainStringGauge[]> dicOfStringSetForSix
+		= new() {
+			{ TypeOfStringSetForSix.DAddarioErnieBall_009,
+				[TypeOfPlainStringGauge.P009]}
+
+		};
 	#endregion
 
 	#region fields
@@ -21,7 +27,7 @@ public class GuitarSetting {
 
 	private float minNeckLength = 25.5f;
 
-	private float maxNeckLength = 30.0f;
+	private float maxNeckLength = 26.5f;
 
 	private int stringCount = 6;
 
