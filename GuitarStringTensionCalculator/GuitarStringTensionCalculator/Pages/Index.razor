@@ -8,7 +8,17 @@
 
 <MudText Class="pa-2">@message</MudText>
 
-<MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" OnClick="@AddGuitar" />
+<MudStack Row Class="pa-4">
+	<MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Size="Size.Small" OnClick="@AddGuitar" />
+	<MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Outlined.FileDownload" Size="Size.Small" OnClick="@Download"/>
+	<MudFileUpload T="IBrowserFile" Accept=".llstc" FilesChanged="Upload">
+		<ActivatorContent>
+			<MudFab Color="Color.Secondary"
+					Size="Size.Small"
+					StartIcon="@Icons.Material.Outlined.UploadFile" />
+		</ActivatorContent>
+	</MudFileUpload>
+</MudStack>
 
 <MudStack Row StretchItems="StretchItems.None" Justify=Justify.Center AlignItems="AlignItems.Start" Class="pa-4 overflow-scroll" Style="min-width: 100%;">
 	@for (var i = 0; i < this.guitarSettings.Count; i++) {
@@ -190,6 +200,6 @@
 </MudStack>
 
 <MudContainer Class="pa-4">
-    <MudChart ChartType="ChartType.Line" ChartSeries="@serieses" XAxisLabels="@xAxisLabels" Width="100%" Height="350" ChartOptions="@chartOptions"></MudChart>
+	<MudChart ChartType="ChartType.Line" ChartSeries="@serieses" XAxisLabels="@xAxisLabels" Width="100%" Height="350" ChartOptions="@chartOptions"></MudChart>
 </MudContainer>
 

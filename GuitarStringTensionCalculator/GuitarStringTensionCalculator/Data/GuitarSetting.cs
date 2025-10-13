@@ -1,11 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data;
+using MemoryPack;
 using MudBlazor;
 using static LilytechLab.GuitarStringTensionCalculator.Data.GuitarSetting.StringSetting;
 
 namespace LilytechLab.GuitarStringTensionCalculator.Data;
 
-public class GuitarSetting {
+[MemoryPackable]
+public partial class GuitarSetting {
 
 	#region constants/readonly
 	private static readonly float[] neckLengthArray = { 24.0f, 24.75f, 25.0f, 25.4f, 25.5f, 26.0f, 26.25f, 26.5f, 27.0f, 27.5f, 28.0f, 28.5f, 28.75f, 30.0f };
@@ -37,13 +39,16 @@ public class GuitarSetting {
 	#endregion
 
 	#region constructors
-	public GuitarSetting(int guitarNumber) {
+	public GuitarSetting(int guitarNumber) : this($"Guitar #{guitarNumber}") { }
+
+	[MemoryPackConstructor]
+	public GuitarSetting(string guitarName) {
 		for (var i = 0; i < 6; i++) {
 			var stringSetting = new StringSetting(i + 1,this.NeckLength);
 			this.StringSettings.Add( stringSetting);
 		}
 
-		this.guitarName = $"Guitar #{guitarNumber}";
+		this.guitarName = guitarName;
 		this.SetGauge();
 		this.UpdateChart();
 
@@ -75,8 +80,6 @@ public class GuitarSetting {
 		Normal,
 		Multi
 	}
-
-	public static float[] NeckLengthArray => neckLengthArray;
 
 	public enum TypeOfStringSetForSix {
 		DunlopRevWillys_007,
@@ -143,6 +146,9 @@ public class GuitarSetting {
 	#endregion
 
 	#region properties
+	[MemoryPackIgnore]
+	public static float[] NeckLengthArray => neckLengthArray;
+
 	private static LinkedList<TypeOfKey> KeyRing { get; set; } = new(Enum.GetValues<TypeOfKey>());
 
 	public string GuitarName {
@@ -246,6 +252,7 @@ public class GuitarSetting {
 
 	public List<StringSetting> StringSettings { get; private set; } = new(8);
 
+	[MemoryPackIgnore]
 	public ChartSeries ChartSeries { get; } = new() {
 		ShowDataMarkers = true
 	};
@@ -297,7 +304,8 @@ public class GuitarSetting {
 	#endregion
 
 	#region inner classes
-	public class StringSetting {
+	[MemoryPackable]	
+	public partial class StringSetting {
 
 		#region fields
 		private float length;
@@ -406,6 +414,7 @@ public class GuitarSetting {
 		#endregion
 
 		#region properties
+		[MemoryPackIgnore]
 		public Dictionary<int, TypeOfKey> KeyDic { get; } = [];
 
 		public int StringNumber { get; }
@@ -446,6 +455,7 @@ public class GuitarSetting {
 			}
 		}
 
+		[MemoryPackIgnore]
 		public double Tension {
 			get => this.tension;
 			private set {
@@ -456,8 +466,10 @@ public class GuitarSetting {
 			}
 		}
 
+		[MemoryPackIgnore]
 		public double Tension_lb { get; private set; }
 
+		[MemoryPackIgnore]
 		public double Freqency {
 			get {
 				var offsetFromA0OnStandardKey = this.StringNumber switch {

@@ -1,26 +1,36 @@
 ﻿using LilytechLab.GuitarStringTensionCalculator.Data;
+using MemoryPack;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using MudBlazor;
+using static MudBlazor.CategoryTypes;
 
 namespace LilytechLab.GuitarStringTensionCalculator.Pages;
 
 public partial class Index {
 
 	#region constants/readonly
-	private readonly List<GuitarSetting> guitarSettings = [];
-
 	private readonly List<ChartSeries> serieses = [];
 
-	private string[] xAxisLabels = null!;
+	private readonly ChartOptions chartOptions = new() {
+		ShowToolTips = true,
+		YAxisRequireZeroPoint = true,
+		YAxisTicks = 1,
+	};
 	#endregion
 
 	#region field members
 	private string message = string.Empty;
 
-	private ChartOptions chartOptions = new() {
-		ShowToolTips = true,
-		YAxisRequireZeroPoint = true,
-		YAxisTicks = 1,
-	};
+	private string[] xAxisLabels = null!;
+
+	private List<GuitarSetting> guitarSettings = [];
+	#endregion
+
+	#region properties
+	[Inject]
+	public required IJSRuntime JSRuntime { private get; init; }
 	#endregion
 
 	#region public/protected methods
@@ -34,6 +44,38 @@ public partial class Index {
 	#endregion
 
 	#region private methods
+	#region event methods
+	private async Task Download() {
+		var bytes = MemoryPackSerializer.Serialize(this.guitarSettings);
+
+		var base64String = Convert.ToBase64String(bytes);
+		await JSRuntime.InvokeVoidAsync(
+			"downloadFromBase64String",
+			"StringTensionCalculatorSetting.llstc",
+			base64String
+		);
+	}
+
+	private async Task Upload(IBrowserFile file) {
+		using var fs = file.OpenReadStream();
+		using var ms = new MemoryStream();
+		await fs.CopyToAsync(ms);
+		var bytes = ms.ToArray();
+
+		var setting = MemoryPackSerializer.Deserialize<List<GuitarSetting>>(bytes);
+		if (setting != null) {
+			this.message = "";
+			this.guitarSettings = setting;
+
+			this.serieses.Clear();
+			this.serieses.AddRange(this.guitarSettings.Select(x => x.ChartSeries));
+
+			this.StateHasChanged();
+		} else {
+			this.message = Loc["FileIsCorrupted"];
+		}
+	}
+
 	private void AddGuitar() {
 		var newGuitar = new GuitarSetting(this.guitarSettings.Count + 1);
 		this.guitarSettings.Add(newGuitar);
@@ -44,6 +86,7 @@ public partial class Index {
 		this.serieses.RemoveAt(index);
 		this.guitarSettings.RemoveAt(index);
 	}
+	#endregion
 
 	private string CreateStringNotation(int stringNumber) {
 		var ret = string.Empty;

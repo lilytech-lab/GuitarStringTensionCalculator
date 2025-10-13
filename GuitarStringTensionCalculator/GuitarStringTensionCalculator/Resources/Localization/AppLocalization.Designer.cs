@@ -61,6 +61,15 @@ namespace LilytechLab.GuitarStringTensionCalculator.Resources.Localization {
         }
         
         /// <summary>
+        ///   The file is corrupted and unreadable. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string FileIsCorrupted {
+            get {
+                return ResourceManager.GetString("FileIsCorrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Gauge に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Gauge {
