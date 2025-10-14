@@ -13,8 +13,8 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-xSetK8SIe\/\/3ZmF\/ub1+3sGxIiI7sURgkMQtScjnRSI=",
-      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.bpaf67sqhh.wasm.br"
+      "hash": "sha256-O4TxAHRe4g6d24z50q+6f3YBfdkuKINK4Fys7cvaWe0=",
+      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.7wkj40hfhj.wasm.br"
     },
     {
       "hash": "sha256-V57NmsCLetai8y1tiXEfph7ePl\/0BzgS8B5DtASNjTg=",
@@ -213,7 +213,7 @@
       "url": "_framework\/System.m0fu6d0eya.wasm.br"
     },
     {
-      "hash": "sha256-cG\/CcRXDCbCWJjyLLdGEpQ6tc51eage9vCMBj1z4ViM=",
+      "hash": "sha256-8hDR7beIksy2Cwuf1YiZUWP7J58pYVSxmkV\/vAd5gGc=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -249,15 +249,15 @@
       "url": "_framework\/icudt_no_CJK.lfu7j35m59.dat.br"
     },
     {
-      "hash": "sha256-4Mtjv2wMqI9w1W\/vjTxsnggCH1swHAKKRWPxoB4DXDY=",
-      "url": "_framework\/ja\/LilytechLab.GuitarStringTensionCalculator.resources.dyzdg2rpmn.wasm.br"
+      "hash": "sha256-QKu4Q9vDbQ4q4oZ+C7Bn0iMVo4wBxxOX87qyvUmKxcc=",
+      "url": "_framework\/ja\/LilytechLab.GuitarStringTensionCalculator.resources.c16z7e12hc.wasm.br"
     },
     {
       "hash": "sha256-vGbjgqEqv4y3q5OB8W2R9LthkuF8mQfHFeNdKSReSmU=",
       "url": "css\/app.css"
     },
     {
-      "hash": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg=",
+      "hash": "sha256-+w9CYnrsiKW1F9KMvq\/L4CpPHe416hPbvglqUOy5k38=",
       "url": "favicon.png"
     },
     {
@@ -269,11 +269,11 @@
       "url": "helper.js.map"
     },
     {
-      "hash": "sha256-DbpQaq68ZSb5IoPosBErM1QWBfsbTxpJqhU0REi6wP4=",
+      "hash": "sha256-9irbTIDS8bHTPHwbzJ7w41DVb6ylrrZatLX0zkrPaGg=",
       "url": "icon-192.png"
     },
     {
-      "hash": "sha256-oEo6d+KqX5fjxTiZk\/w9NB3Mi0+ycS5yLwCKwr4IkbA=",
+      "hash": "sha256-zayXo\/XMjth7XCX3PXke\/InMa2NOUHu4BoEwPezPmbA=",
       "url": "icon-512.png"
     },
     {
@@ -477,5 +477,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "XPyUf1Eo"
+  "version": "aazXBHFV"
 };

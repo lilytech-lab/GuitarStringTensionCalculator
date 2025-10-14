@@ -46,10 +46,10 @@ public partial class GuitarSetting {
 		for (var i = 0; i < 6; i++) {
 			var stringSetting = new StringSetting(i + 1,this.NeckLength);
 			this.StringSettings.Add( stringSetting);
+			this.SetGauge(i + 1);
 		}
 
 		this.guitarName = guitarName;
-		this.SetGauge();
 		this.UpdateChart();
 
 		StringSetting.TensionChanged += (_, _) => this.UpdateChart();
@@ -211,15 +211,17 @@ public partial class GuitarSetting {
 
 			if (oldCount < this.stringCount) {
 				if (oldCount == 6) {
-					var stringSetting = new StringSetting(7, this.NeckLength);
+					var stringNumber = 7;
+					var stringSetting = new StringSetting(stringNumber, this.NeckLength);
 					this.StringSettings.Add(stringSetting);
+					this.SetGauge(stringNumber);
 				}
 				if (this.stringCount == 8) {
-					var stringSetting = new StringSetting(8, this.NeckLength);
+					var stringNumber = 8;
+					var stringSetting = new StringSetting(stringNumber, this.NeckLength);
 					this.StringSettings.Add(stringSetting);
+					this.SetGauge(stringNumber);
 				}
-
-				this.SetGauge();
 			} else {
 				this.StringSettings.RemoveRange(this.stringCount, oldCount - this.stringCount);
 				this.UpdateChart();
@@ -236,7 +238,7 @@ public partial class GuitarSetting {
 		get => this.stringSetForSix;
 		set {
 			this.stringSetForSix = value;
-			this.SetGauge();
+			//this.SetGauge();
 		}
 	}
 
@@ -273,19 +275,34 @@ public partial class GuitarSetting {
 		this.UpdateChart();
 	}
 
-	private void SetGauge() {
-		this.StringSettings[0].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P010;
-		this.StringSettings[1].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P013;
-		this.StringSettings[2].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P017;
-		this.StringSettings[3].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W026;
-		this.StringSettings[4].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W036;
-		this.StringSettings[5].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W046;
-
-		if (this.StringSettings.Count > 6)
-			this.StringSettings[6].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W054;
-
-		if (this.StringSettings.Count == 8)
-			this.StringSettings[7].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W064;
+	private void SetGauge(int stringNumber) {
+		var index = stringNumber - 1;
+		switch (index) {
+			case 0:
+				this.StringSettings[index].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P010;
+				break;
+			case 1:
+				this.StringSettings[index].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P013;
+				break;
+			case 2:
+				this.StringSettings[index].PlainStringGauge = StringSetting.TypeOfPlainStringGauge.P017;
+				break;
+			case 3:
+				this.StringSettings[index].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W026;
+				break;
+			case 4:
+				this.StringSettings[index].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W036;
+				break;
+			case 5:
+				this.StringSettings[index].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W046;
+				break;
+			case 6:
+				this.StringSettings[index].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W059;
+				break;
+			case 7:
+				this.StringSettings[index].WoundStringGauge = StringSetting.TypeOfWoundStringGauge.W074;
+				break;
+		}
 
 		switch (this.StringSetForSix) {
 			case TypeOfStringSetForSix.DAddarioErnieBall_009:
