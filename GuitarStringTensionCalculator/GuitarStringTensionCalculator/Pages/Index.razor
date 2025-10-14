@@ -151,15 +151,19 @@
 				<RowEditingTemplate>
 					<MudTd DataLabel="">@CreateStringNotation(context.StringNumber)</MudTd>
 					<MudTd DataLabel="P/W">
-						<MudToggleGroup @bind-Value="@context.PlainOrWound" Vertical="false" Outlined="true" Delimiters="true" Size="Size.Small" Color="Color.Primary" CheckMark="false" Disabled="false">
-							@foreach (var value in Enum.GetValues<TypeOfPlainOrWound>()) {
-								<MudToggleItem Value="value">
-									<ChildContent Context="_">
-										@value
-									</ChildContent>
-								</MudToggleItem>
-							}
-						</MudToggleGroup>
+						@if (context.StringNumber == 3) {
+							<MudToggleGroup @bind-Value="@context.PlainOrWound" Vertical="false" Outlined="true" Delimiters="true" Size="Size.Small" Color="Color.Primary" CheckMark="false" Disabled="false">
+								@foreach (var value in Enum.GetValues<TypeOfPlainOrWound>()) {
+									<MudToggleItem Value="value">
+										<ChildContent Context="_">
+											@value
+										</ChildContent>
+									</MudToggleItem>
+								}
+							</MudToggleGroup>
+						} else {
+							@context.PlainOrWound
+						}
 					</MudTd>
 					<MudTd DataLabel="@Loc["Gauge"]">
 						@if (context.PlainOrWound == TypeOfPlainOrWound.P) {

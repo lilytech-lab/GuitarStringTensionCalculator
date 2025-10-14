@@ -13,8 +13,8 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     },
     {
-      "hash": "sha256-O4TxAHRe4g6d24z50q+6f3YBfdkuKINK4Fys7cvaWe0=",
-      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.7wkj40hfhj.wasm.br"
+      "hash": "sha256-txA8HfTDJmLFHPEjauWWugrVOVsh7+M0OMHN\/Y+mThE=",
+      "url": "_framework\/LilytechLab.GuitarStringTensionCalculator.kcl2dmzngl.wasm.br"
     },
     {
       "hash": "sha256-V57NmsCLetai8y1tiXEfph7ePl\/0BzgS8B5DtASNjTg=",
@@ -213,7 +213,7 @@
       "url": "_framework\/System.m0fu6d0eya.wasm.br"
     },
     {
-      "hash": "sha256-8hDR7beIksy2Cwuf1YiZUWP7J58pYVSxmkV\/vAd5gGc=",
+      "hash": "sha256-m1Pq5z1WQkl4qnyyiL3R1Su+9oS3F2Ufv2wR4BhurIg=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -249,8 +249,8 @@
       "url": "_framework\/icudt_no_CJK.lfu7j35m59.dat.br"
     },
     {
-      "hash": "sha256-QKu4Q9vDbQ4q4oZ+C7Bn0iMVo4wBxxOX87qyvUmKxcc=",
-      "url": "_framework\/ja\/LilytechLab.GuitarStringTensionCalculator.resources.c16z7e12hc.wasm.br"
+      "hash": "sha256-5oigKW7WNIt4SqgWedElnkBRfTfeSLz7GcwcW9zvhkw=",
+      "url": "_framework\/ja\/LilytechLab.GuitarStringTensionCalculator.resources.3fgk0izj3o.wasm.br"
     },
     {
       "hash": "sha256-vGbjgqEqv4y3q5OB8W2R9LthkuF8mQfHFeNdKSReSmU=",
@@ -477,5 +477,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "aazXBHFV"
+  "version": "Bg1iLww4"
 };
