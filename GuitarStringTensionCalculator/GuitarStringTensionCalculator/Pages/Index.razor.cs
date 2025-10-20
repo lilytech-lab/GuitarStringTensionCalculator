@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using MudBlazor;
-using static MudBlazor.CategoryTypes;
 
 namespace LilytechLab.GuitarStringTensionCalculator.Pages;
 
