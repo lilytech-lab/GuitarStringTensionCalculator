@@ -97,11 +97,29 @@ namespace LilytechLab.GuitarStringTensionCalculator.Resources.Localization {
         }
         
         /// <summary>
+        ///   Lilytech Lab に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LilytechLab {
+            get {
+                return ResourceManager.GetString("LilytechLab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Low String Length に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string LowStringLength {
             get {
                 return ResourceManager.GetString("LowStringLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Multi Scale に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MultiScale {
+            get {
+                return ResourceManager.GetString("MultiScale", resourceCulture);
             }
         }
         

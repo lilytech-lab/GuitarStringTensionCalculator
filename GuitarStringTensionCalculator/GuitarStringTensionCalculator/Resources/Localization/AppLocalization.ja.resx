@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FileIsCorrupted" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Gauge" xml:space="preserve">
     <value>ゲージ</value>
   </data>
@@ -165,5 +161,14 @@
   </data>
   <data name="Tuning" xml:space="preserve">
     <value>チューニング</value>
+  </data>
+  <data name="FileIsCorrupted" xml:space="preserve">
+    <value>ファイルが壊れていて読み込めません。</value>
+  </data>
+  <data name="LilytechLab" xml:space="preserve">
+    <value>りりらぼ</value>
+  </data>
+  <data name="MultiScale" xml:space="preserve">
+    <value>マルチスケール</value>
   </data>
 </root>

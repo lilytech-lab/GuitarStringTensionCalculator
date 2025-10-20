@@ -23,7 +23,7 @@ public partial class GuitarSetting {
 	#region fields
 	private string guitarName;
 
-	private TypeOfNeck neckType = TypeOfNeck.Normal;
+	private bool isMultiScale = false;
 
 	private float neckLength = 25.5f;
 
@@ -162,13 +162,8 @@ public partial class GuitarSetting {
 	}
 
 	public TypeOfNeck NeckType {
-		get => this.neckType;
-		set {
-			if (this.neckType == value) return;
-
-			this.neckType = value;
-			this.SetStringLength();
-		}
+		get => this.isMultiScale ? TypeOfNeck.Multi : TypeOfNeck.Normal;
+		set => this.isMultiScale = (value == TypeOfNeck.Multi);
 	}
 
 	public float NeckLength {
@@ -227,7 +222,7 @@ public partial class GuitarSetting {
 				this.UpdateChart();
 			}
 
-			if (this.NeckType == TypeOfNeck.Multi) {
+			if (this.IsMultiScale) {
 				this.SetStringLength();
 			}
 			
@@ -254,6 +249,17 @@ public partial class GuitarSetting {
 
 	public List<StringSetting> StringSettings { get; private set; } = new(8);
 
+	[SuppressDefaultInitialization]
+	public bool IsMultiScale {
+		get => this.isMultiScale;
+		set {
+			if (this.isMultiScale == value) return;
+
+			this.isMultiScale = value;
+			this.SetStringLength();
+		}
+	}
+
 	[MemoryPackIgnore]
 	public ChartSeries ChartSeries { get; } = new() {
 		ShowDataMarkers = true
@@ -264,7 +270,7 @@ public partial class GuitarSetting {
 
 	private void SetStringLength() {
 		for (var i = 0; i < this.StringSettings.Count; i++) {
-			if (this.NeckType == TypeOfNeck.Normal) {
+			if (!this.IsMultiScale) {
 				this.StringSettings[i].Length = this.NeckLength;
 			} else {
 				var diff = (this.MaxNeckLength - this.MinNeckLength) / (this.StringCount - 1);
@@ -321,7 +327,7 @@ public partial class GuitarSetting {
 	#endregion
 
 	#region inner classes
-	[MemoryPackable]	
+	[MemoryPackable]
 	public partial class StringSetting {
 
 		#region fields

@@ -4,7 +4,7 @@
 @using static LilytechLab.GuitarStringTensionCalculator.Data.GuitarSetting
 @inject IStringLocalizer<AppLocalization> Loc
 
-<PageTitle>Guitar String Tension Calculator</PageTitle>
+<PageTitle>@Loc["LilytechLab"] Guitar String Tension Calculator</PageTitle>
 
 <MudText Class="pa-2">@message</MudText>
 
@@ -37,15 +37,9 @@
 			</MudStack>
 		
 			<MudStack Row Class="pa-4">
-				<MudSelect @bind-Value="guitar.NeckType" Label="@Loc["NeckType"]">
-					@foreach (var value in Enum.GetValues<TypeOfNeck>()) {
-						<MudSelectItem value="value">
-							@value
-						</MudSelectItem>
-					}
-				</MudSelect>
+				<MudSwitch Class="pr-2" @bind-Value="guitar.IsMultiScale" Label="@Loc["MultiScale"]" LabelPlacement="Placement.Start" Color="Color.Primary" />
 		
-				@if (guitar.NeckType == TypeOfNeck.Normal) {
+				@if (!guitar.IsMultiScale) {
 					<MudSelect @bind-Value="guitar.NeckLength" Label="@Loc["NeckLength"]">
 						@foreach (var value in NeckLengthArray) {
 							<MudSelectItem value="value">@value</MudSelectItem>

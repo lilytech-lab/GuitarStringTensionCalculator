@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FileIsCorrupted" xml:space="preserve">
-    <value>The file is corrupted and unreadable.</value>
-  </data>
   <data name="Gauge" xml:space="preserve">
     <value>Gauge</value>
   </data>
@@ -164,5 +161,14 @@
   </data>
   <data name="Tuning" xml:space="preserve">
     <value>Tuning</value>
+  </data>
+  <data name="FileIsCorrupted" xml:space="preserve">
+    <value>The file is corrupted and unreadable.</value>
+  </data>
+  <data name="LilytechLab" xml:space="preserve">
+    <value>Lilytech Lab</value>
+  </data>
+  <data name="MultiScale" xml:space="preserve">
+    <value>Multi Scale</value>
   </data>
 </root>
