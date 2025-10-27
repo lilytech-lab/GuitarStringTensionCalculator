@@ -20,182 +20,184 @@
 	</MudFileUpload>
 </MudStack>
 
-<MudStack Row StretchItems="StretchItems.None" Justify=Justify.Center AlignItems="AlignItems.Start" Class="pa-4 overflow-scroll" Style="min-width: 100%;">
-	@for (var i = 0; i < this.guitarSettings.Count; i++) {
-		var guitar = this.guitarSettings[i];
-		var guitarIndex = i;
+<MudContainer Class="pa-4 overflow-x-auto" Style="min-width: 100%;">
+	<MudStack Row StretchItems="StretchItems.None" Justify="Justify.FlexStart" AlignItems="AlignItems.Start" Style="width: max-content; margin: 0 auto;">
+		@for (var i = 0; i < this.guitarSettings.Count; i++) {
+			var guitar = this.guitarSettings[i];
+			var guitarIndex = i;
 
-		<MudPaper Class="pa-4 flex-grow-0 flex-shrink-0">
-			<MudStack Row StretchItems="StretchItems.Start" Class="pa-4">
-				<MudTextField @bind-Value="guitar.GuitarName" Variant="Variant.Text" Typo="Typo.h5"></MudTextField>
-				<MudFab
-					Color="Color.Secondary"
-					StartIcon="@Icons.Material.Outlined.Delete"
-					Size="Size.Small"
-					Disabled="this.guitarSettings.Count == 1"
-					@onclick="() => RemoveGuitar(guitarIndex)" />
-			</MudStack>
-		
-			<MudStack Row Class="pa-4">
-				<MudSwitch Class="pr-2" @bind-Value="guitar.IsMultiScale" Label="@Loc["MultiScale"]" LabelPlacement="Placement.Start" Color="Color.Primary" />
-		
-				@if (!guitar.IsMultiScale) {
-					<MudSelect @bind-Value="guitar.NeckLength" Label="@Loc["NeckLength"]">
-						@foreach (var value in NeckLengthArray) {
-							<MudSelectItem value="value">@value</MudSelectItem>
-						}
-					</MudSelect>
-				} else {
-					<MudSelect @bind-Value="guitar.MinNeckLength" Label="@Loc["HighStringLength"]">
-						@foreach (var value in NeckLengthArray) {
-							<MudSelectItem value="value">@value</MudSelectItem>
-						}
-					</MudSelect>
-		
-					<MudText Class="px-2">～</MudText>
-		
-					<MudSelect @bind-Value="guitar.MaxNeckLength" Label="@Loc["LowStringLength"]">
-						@foreach (var value in NeckLengthArray) {
-							<MudSelectItem value="value">@value</MudSelectItem>
-						}
-					</MudSelect>
-					
-				}
-			</MudStack>
-		
-			<MudStack Row Class="pa-4">
-				<MudSelect @bind-Value="guitar.StringCount" Label="@Loc["StringCount"]">
-					@foreach (int i in Enumerable.Range(6, 3)) {
-						<MudSelectItem value="i">@i</MudSelectItem>
+			<MudPaper Class="pa-4 flex-grow-0 flex-shrink-0">
+				<MudStack Row StretchItems="StretchItems.Start" Class="pa-4">
+					<MudTextField @bind-Value="guitar.GuitarName" Variant="Variant.Text" Typo="Typo.h5"></MudTextField>
+					<MudFab
+						Color="Color.Secondary"
+						StartIcon="@Icons.Material.Outlined.Delete"
+						Size="Size.Small"
+						Disabled="this.guitarSettings.Count == 1"
+						@onclick="() => RemoveGuitar(guitarIndex)" />
+				</MudStack>
+
+				<MudStack Row Class="pa-4">
+					<MudSwitch Class="pr-2" @bind-Value="guitar.IsMultiScale" Label="@Loc["MultiScale"]" LabelPlacement="Placement.Start" Color="Color.Primary" />
+
+					@if (!guitar.IsMultiScale) {
+						<MudSelect @bind-Value="guitar.NeckLength" Label="@Loc["NeckLength"]">
+							@foreach (var value in NeckLengthArray) {
+								<MudSelectItem value="value">@value</MudSelectItem>
+							}
+						</MudSelect>
+					} else {
+						<MudSelect @bind-Value="guitar.MinNeckLength" Label="@Loc["HighStringLength"]">
+							@foreach (var value in NeckLengthArray) {
+								<MudSelectItem value="value">@value</MudSelectItem>
+							}
+						</MudSelect>
+
+						<MudText Class="px-2">～</MudText>
+
+						<MudSelect @bind-Value="guitar.MaxNeckLength" Label="@Loc["LowStringLength"]">
+							@foreach (var value in NeckLengthArray) {
+								<MudSelectItem value="value">@value</MudSelectItem>
+							}
+						</MudSelect>
+
 					}
-				</MudSelect>
-		
-				@* @switch (guitar.StringCount) {
-					case 6:
-						<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
-							@foreach (var value in Enum.GetValues<TypeOfStringSetForSix>()) {
-								<MudSelectItem value="value">@value</MudSelectItem>
-							}
-						</MudSelect>
-						break;
-		
-					 case 7:
-						<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
-							@foreach (var value in Enum.GetValues<TypeOfStringSetForSeven>()) {
-								<MudSelectItem value="value">@value</MudSelectItem>
-							}
-						</MudSelect>
-						break;
-		
-					case 9:
-						<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
-							@foreach (var value in Enum.GetValues<TypeOfStringSetForEight>()) {
-								<MudSelectItem value="value">@value</MudSelectItem>
-							}
-						</MudSelect>
-						break;
-		
-					default:
-						break;
-				} *@
-			</MudStack>
-		
-			<MudStack Row Class="pa-4">
-				<MudSelect @bind-Value="guitar.StandardTuningType" Label="@Loc["Tuning"]">
-					@foreach (var value in Enum.GetValues<TypeOfStandardTuning>().OrderByDescending(x => (int)x)) {
-						<MudSelectItem value="value">@value.GetKeyName()</MudSelectItem>
-					}
-				</MudSelect>
-			</MudStack>
-		
-			<MudTable Items="@guitar.StringSettings" Dense="true">
-				@* <ColGroup>
-					<col />
-					<col />
-					<col style="width:100px;" />
-					<col />
-					<col />
-				</ColGroup> *@
-				<HeaderContent>
-					<MudTh></MudTh>
-					<MudTh>P/W</MudTh>
-					<MudTh>@Loc["Gauge"]</MudTh>
-					<MudTh>@Loc["Note"]</MudTh>
-					<MudTh>@(Loc["Tension"] + "[kg]")</MudTh>
-					<MudTh>@(Loc["Tension"] + "[lb]")</MudTh>
-					<MudTh>@Loc["ScaleLength"]</MudTh>
-					@* <MudTh>周波数</MudTh> *@
-				</HeaderContent>
-				<RowTemplate>
-					<MudTd DataLabel="">@CreateStringNotation(context.StringNumber)</MudTd>
-					<MudTd DataLabel="P/W">@context.PlainOrWound</MudTd>
-					<MudTd DataLabel="@Loc["Gauge"]">
-						@if (context.PlainOrWound == TypeOfPlainOrWound.P) {
-							@context.PlainStringGauge
-						} else {
-							@context.WoundStringGauge
+				</MudStack>
+
+				<MudStack Row Class="pa-4">
+					<MudSelect @bind-Value="guitar.StringCount" Label="@Loc["StringCount"]">
+						@foreach (int i in Enumerable.Range(6, 3)) {
+							<MudSelectItem value="i">@i</MudSelectItem>
 						}
-					</MudTd>
-					<MudTd DataLabel="@Loc["Note"]">@context.KeyDic[context.Offset].GetKeyName()</MudTd>
-					<MudTd DataLabel="@(Loc["Tension"] + "[kg]")">@context.Tension.ToString("f2")</MudTd>
-					<MudTd DataLabel="@(Loc["Tension"] + "[lb]")">@context.Tension_lb.ToString("f2")</MudTd>
-					<MudTd DataLabel="@Loc["ScaleLength"]">@context.Length.ToString("f2")</MudTd>
-					@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
-				</RowTemplate>
-				<RowEditingTemplate>
-					<MudTd DataLabel="">@CreateStringNotation(context.StringNumber)</MudTd>
-					<MudTd DataLabel="P/W">
-						@if (context.StringNumber == 3) {
-							<MudToggleGroup @bind-Value="@context.PlainOrWound" Vertical="false" Outlined="true" Delimiters="true" Size="Size.Small" Color="Color.Primary" CheckMark="false" Disabled="false">
-								@foreach (var value in Enum.GetValues<TypeOfPlainOrWound>()) {
-									<MudToggleItem Value="value">
-										<ChildContent Context="_">
-											@value
-										</ChildContent>
-									</MudToggleItem>
-								}
-							</MudToggleGroup>
-						} else {
-							@context.PlainOrWound
-						}
-					</MudTd>
-					<MudTd DataLabel="@Loc["Gauge"]">
-						@if (context.PlainOrWound == TypeOfPlainOrWound.P) {
-							<MudSelect @bind-Value="@context.PlainStringGauge" FitContent="true">
-								@foreach (var value in Enum.GetValues<TypeOfPlainStringGauge>()) {
+					</MudSelect>
+
+					@* @switch (guitar.StringCount) {
+						case 6:
+							<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
+								@foreach (var value in Enum.GetValues<TypeOfStringSetForSix>()) {
 									<MudSelectItem value="value">@value</MudSelectItem>
 								}
 							</MudSelect>
-						} else {
-							<MudSelect @bind-Value="@context.WoundStringGauge" FitContent="true">
-								@foreach (var value in Enum.GetValues<TypeOfWoundStringGauge>()) {
+							break;
+
+						 case 7:
+							<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
+								@foreach (var value in Enum.GetValues<TypeOfStringSetForSeven>()) {
 									<MudSelectItem value="value">@value</MudSelectItem>
 								}
 							</MudSelect>
+							break;
+
+						case 9:
+							<MudSelect @bind-Value="guitar.StringSetForSix" Label="弦セット">
+								@foreach (var value in Enum.GetValues<TypeOfStringSetForEight>()) {
+									<MudSelectItem value="value">@value</MudSelectItem>
+								}
+							</MudSelect>
+							break;
+
+						default:
+							break;
+					} *@
+				</MudStack>
+
+				<MudStack Row Class="pa-4">
+					<MudSelect @bind-Value="guitar.StandardTuningType" Label="@Loc["Tuning"]">
+						@foreach (var value in Enum.GetValues<TypeOfStandardTuning>().OrderByDescending(x => (int)x)) {
+							<MudSelectItem value="value">@value.GetKeyName()</MudSelectItem>
 						}
-					</MudTd>
-					<MudTd DataLabel="@Loc["Note"]">
-						<MudSelect @bind-Value="@context.Offset" FitContent="true">
-							@foreach (var keyValuePair in context.KeyDic) {
-								<MudSelectItem value="keyValuePair.Key">@keyValuePair.Value.GetKeyName()</MudSelectItem>
+					</MudSelect>
+				</MudStack>
+
+				<MudTable Items="@guitar.StringSettings" Dense="true">
+					@* <ColGroup>
+						<col />
+						<col />
+						<col style="width:100px;" />
+						<col />
+						<col />
+					</ColGroup> *@
+					<HeaderContent>
+						<MudTh></MudTh>
+						<MudTh>P/W</MudTh>
+						<MudTh>@Loc["Gauge"]</MudTh>
+						<MudTh>@Loc["Note"]</MudTh>
+						<MudTh>@(Loc["Tension"] + "[kg]")</MudTh>
+						<MudTh>@(Loc["Tension"] + "[lb]")</MudTh>
+						<MudTh>@Loc["ScaleLength"]</MudTh>
+						@* <MudTh>周波数</MudTh> *@
+					</HeaderContent>
+					<RowTemplate>
+						<MudTd DataLabel="">@CreateStringNotation(context.StringNumber)</MudTd>
+						<MudTd DataLabel="P/W">@context.PlainOrWound</MudTd>
+						<MudTd DataLabel="@Loc["Gauge"]">
+							@if (context.PlainOrWound == TypeOfPlainOrWound.P) {
+								@context.PlainStringGauge
+							} else {
+								@context.WoundStringGauge
 							}
-						</MudSelect>
-					</MudTd>
-					<MudTd DataLabel="@(Loc["Tension"] + "[kg]")">@context.Tension.ToString("f2")</MudTd>
-					<MudTd DataLabel="@(Loc["Tension"] + "[lb]")">@context.Tension_lb.ToString("f2")</MudTd>
-					<MudTd DataLabel="@Loc["ScaleLength"]">@context.Length.ToString("f2")</MudTd>
-					@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
-				</RowEditingTemplate>
-				<FooterContent>
-					<MudTd colspan="4">@Loc["Total"]</MudTd>
-					<MudTd>@guitar.StringSettings.Sum(x => x.Tension).ToString("f2")</MudTd>
-					<MudTd>@guitar.StringSettings.Sum(x => x.Tension_lb).ToString("f2")</MudTd>
-					<MudTd></MudTd>
-				</FooterContent>
-			</MudTable>
-		</MudPaper>
-	}
-</MudStack>
+						</MudTd>
+						<MudTd DataLabel="@Loc["Note"]">@context.KeyDic[context.Offset].GetKeyName()</MudTd>
+						<MudTd DataLabel="@(Loc["Tension"] + "[kg]")">@context.Tension.ToString("f2")</MudTd>
+						<MudTd DataLabel="@(Loc["Tension"] + "[lb]")">@context.Tension_lb.ToString("f2")</MudTd>
+						<MudTd DataLabel="@Loc["ScaleLength"]">@context.Length.ToString("f2")</MudTd>
+						@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
+					</RowTemplate>
+					<RowEditingTemplate>
+						<MudTd DataLabel="">@CreateStringNotation(context.StringNumber)</MudTd>
+						<MudTd DataLabel="P/W">
+							@if (context.StringNumber == 3) {
+								<MudToggleGroup @bind-Value="@context.PlainOrWound" Vertical="false" Outlined="true" Delimiters="true" Size="Size.Small" Color="Color.Primary" CheckMark="false" Disabled="false">
+									@foreach (var value in Enum.GetValues<TypeOfPlainOrWound>()) {
+										<MudToggleItem Value="value">
+											<ChildContent Context="_">
+												@value
+											</ChildContent>
+										</MudToggleItem>
+									}
+								</MudToggleGroup>
+							} else {
+								@context.PlainOrWound
+							}
+						</MudTd>
+						<MudTd DataLabel="@Loc["Gauge"]">
+							@if (context.PlainOrWound == TypeOfPlainOrWound.P) {
+								<MudSelect @bind-Value="@context.PlainStringGauge" FitContent="true">
+									@foreach (var value in Enum.GetValues<TypeOfPlainStringGauge>()) {
+										<MudSelectItem value="value">@value</MudSelectItem>
+									}
+								</MudSelect>
+							} else {
+								<MudSelect @bind-Value="@context.WoundStringGauge" FitContent="true">
+									@foreach (var value in Enum.GetValues<TypeOfWoundStringGauge>()) {
+										<MudSelectItem value="value">@value</MudSelectItem>
+									}
+								</MudSelect>
+							}
+						</MudTd>
+						<MudTd DataLabel="@Loc["Note"]">
+							<MudSelect @bind-Value="@context.Offset" FitContent="true">
+								@foreach (var keyValuePair in context.KeyDic) {
+									<MudSelectItem value="keyValuePair.Key">@keyValuePair.Value.GetKeyName()</MudSelectItem>
+								}
+							</MudSelect>
+						</MudTd>
+						<MudTd DataLabel="@(Loc["Tension"] + "[kg]")">@context.Tension.ToString("f2")</MudTd>
+						<MudTd DataLabel="@(Loc["Tension"] + "[lb]")">@context.Tension_lb.ToString("f2")</MudTd>
+						<MudTd DataLabel="@Loc["ScaleLength"]">@context.Length.ToString("f2")</MudTd>
+						@* <MudTd DataLabel="周波数">@context.Freqency</MudTd> *@
+					</RowEditingTemplate>
+					<FooterContent>
+						<MudTd colspan="4">@Loc["Total"]</MudTd>
+						<MudTd>@guitar.StringSettings.Sum(x => x.Tension).ToString("f2")</MudTd>
+						<MudTd>@guitar.StringSettings.Sum(x => x.Tension_lb).ToString("f2")</MudTd>
+						<MudTd></MudTd>
+					</FooterContent>
+				</MudTable>
+			</MudPaper>
+		}
+	</MudStack>
+</MudContainer>
 
 <MudContainer Class="pa-4">
 	<MudChart ChartType="ChartType.Line" ChartSeries="@serieses" XAxisLabels="@xAxisLabels" CanHideSeries Width="100%" Height="350" ChartOptions="@chartOptions"></MudChart>
