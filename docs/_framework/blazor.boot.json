@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "LilytechLab.GuitarStringTensionCalculator",
   "resources": {
-    "hash": "sha256-BUkaQhZGM7b1QrEQmWSAmjSS39ZTGbRlr/vshwZ0Uvs=",
+    "hash": "sha256-NidmSET463iXl/7mpq8sdwuqMNGKe+bGvRGZuFOOpXY=",
     "fingerprinting": {
       "MemoryPack.Core.czx0bu0vck.wasm": "MemoryPack.Core.wasm",
       "Microsoft.AspNetCore.Components.ojs6dj6i10.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -52,8 +52,8 @@
       "System.Threading.92ez24v1xd.wasm": "System.Threading.wasm",
       "System.m0fu6d0eya.wasm": "System.wasm",
       "System.Private.CoreLib.jncmvuaffd.wasm": "System.Private.CoreLib.wasm",
-      "LilytechLab.GuitarStringTensionCalculator.3ocqftij47.wasm": "LilytechLab.GuitarStringTensionCalculator.wasm",
-      "LilytechLab.GuitarStringTensionCalculator.resources.jxvq6i83la.wasm": "LilytechLab.GuitarStringTensionCalculator.resources.wasm",
+      "LilytechLab.GuitarStringTensionCalculator.qjd8oy6pm9.wasm": "LilytechLab.GuitarStringTensionCalculator.wasm",
+      "LilytechLab.GuitarStringTensionCalculator.resources.tuv3b0yskv.wasm": "LilytechLab.GuitarStringTensionCalculator.resources.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.9ih887ebfz.js": "dotnet.native.js",
       "dotnet.native.21mns4qp4i.wasm": "dotnet.native.wasm",
@@ -128,11 +128,11 @@
       "System.Text.RegularExpressions.89dcfqzf8o.wasm": "sha256-HNVatHpcpSoVEw24rTPfvxjnYUTeABrJm0FSQV49Bl0=",
       "System.Threading.92ez24v1xd.wasm": "sha256-8TOdx+WTSrBAkPVcYh/dHgxZeRNAfj3bK1p4ESYA1bo=",
       "System.m0fu6d0eya.wasm": "sha256-hkGLo/MuT/FJ0Xf4XUL0D2VA4dZV532GHNB1JicxLko=",
-      "LilytechLab.GuitarStringTensionCalculator.3ocqftij47.wasm": "sha256-o6XV4AfJLF4ssoXVtJH8QoB1BWFQnU0Riv+UP0LLBHc="
+      "LilytechLab.GuitarStringTensionCalculator.qjd8oy6pm9.wasm": "sha256-aomw15hevPDICmDhl3eGeFQn9JOTdfmwrMbDSHzdHTM="
     },
     "satelliteResources": {
       "ja": {
-        "LilytechLab.GuitarStringTensionCalculator.resources.jxvq6i83la.wasm": "sha256-J7JMqQZGaTwM+uGs4CNj7aMn88vU5b52tqIungRsbjo="
+        "LilytechLab.GuitarStringTensionCalculator.resources.tuv3b0yskv.wasm": "sha256-Bc/7X0A0sd1w/AEYCrwQGYwMReslc3cal8yaA3fb19E="
       }
     }
   },
