@@ -195,6 +195,10 @@
 					</FooterContent>
 				</MudTable>
 			</MudPaper>
+
+			if (i < this.guitarSettings.Count - 1) {
+				<MudFab Color="Color.Primary" Class="pa-2" StartIcon="@Icons.Material.Filled.CompareArrows" Size="Size.Small" Style="margin: auto 0;" @onclick="() => Swap(guitarIndex)" />
+			}
 		}
 	</MudStack>
 </MudContainer>

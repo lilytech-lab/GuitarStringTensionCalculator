@@ -85,6 +85,20 @@ public partial class Index {
 		this.serieses.RemoveAt(index);
 		this.guitarSettings.RemoveAt(index);
 	}
+
+	private void Swap(int formerIndex) {
+		var formerSeriese = this.serieses[formerIndex];
+		var latterSeriese = this.serieses[formerIndex + 1];
+		this.serieses[formerIndex] = latterSeriese;
+		this.serieses[formerIndex + 1] = formerSeriese;
+
+		var formerGuitar = this.guitarSettings[formerIndex];
+		var latterGuitar = this.guitarSettings[formerIndex + 1];
+		this.guitarSettings[formerIndex] = latterGuitar;
+		this.guitarSettings[formerIndex + 1] = formerGuitar;
+
+		this.StateHasChanged();
+	}
 	#endregion
 
 	private string CreateStringNotation(int stringNumber) {
